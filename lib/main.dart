@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           colorScheme: const ColorScheme.dark(),
           primaryColor: ColorPalette.primary,
           fontFamily: Constants.appFont,
-          useMaterial3: true,
+          // useMaterial3: true,
         ),
       ),
     );
