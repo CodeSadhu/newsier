@@ -42,11 +42,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         home: const SplashScreen(),
         debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.dark,
         theme: ThemeData(
           colorScheme: const ColorScheme.dark(),
           primaryColor: ColorPalette.primary,
           fontFamily: Constants.appFont,
-          // useMaterial3: true,
+          useMaterial3: true,
         ),
       ),
     );

@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
                   height: 10,
                 ),
                 Text(
-                  'News, revolutionized',
+                  'News, easier to read',
                   style: Styles.bodyLarge(),
                 ),
               ],

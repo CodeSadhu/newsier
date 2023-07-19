@@ -1,9 +1,7 @@
 import 'package:carded/carded.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:news_app/models/news.dart';
 import 'package:news_app/providers/news_provider.dart';
-import 'package:news_app/utils/assets.dart';
 import 'package:news_app/utils/colors.dart';
 import 'package:news_app/utils/constants.dart';
 import 'package:news_app/utils/styles.dart';
@@ -45,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
               bottomRight: Radius.circular(15),
             ),
           ),
-          backgroundColor: ColorPalette.primary.withOpacity(0.8),
+          // backgroundColor: ColorPalette.primary,
           toolbarHeight: 80,
           title: Text(
             'Newsier',
@@ -53,14 +51,21 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: RefreshIndicator(
-        onRefresh: () => _newsProvider.fetchNews(),
-        child: Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: 30,
-            horizontal: 30,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 10,
+              left: 20,
+            ),
+            child: Text(
+              'Latest news',
+              style: Styles.bodyLarge(),
+            ),
           ),
-          child: Consumer<NewsProvider>(
+          Consumer<NewsProvider>(
             builder: (context, value, child) {
               News? news = value.news;
               bool isFetching = value.isFetching;
@@ -73,23 +78,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               } else {
                 if (news != null && news.articles != null) {
-                  return SwipeableCardsSection(
-                    cardController: _cardSectionController,
-                    context: context,
-                    enableSwipeDown: false,
-                    enableSwipeUp: false,
-                    onCardSwiped: (dir, index, widget) {
-                      //Add the next card using _cardController
-                      _cardSectionController.addItem(
-                        NewsCard(
+                  return SizedBox(
+                    height: size.height * 0.7,
+                    child: SwipeableCardsSection(
+                      // cardWidthBottomMul: 0,
+                      // cardWidthMiddleMul: 0,
+                      // cardWidthTopMul: 0,
+                      cardController: _cardSectionController,
+                      context: context,
+                      enableSwipeDown: false,
+                      enableSwipeUp: false,
+                      onCardSwiped: (dir, index, widget) {
+                        //Add the next card using _cardController
+                        _cardSectionController.addItem(
+                          NewsCard(
+                            size: size,
+                            article: news.articles![index],
+                          ),
+                        );
+                      },
+                      items: List.generate(
+                        news.articles!.length,
+                        (index) => NewsCard(
+                          size: size,
                           article: news.articles![index],
                         ),
-                      );
-                    },
-                    items: List.generate(
-                      news.articles!.length,
-                      (index) => NewsCard(
-                        article: news.articles![index],
                       ),
                     ),
                   );
@@ -102,17 +115,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
               }
-              // return ListView.builder(
-              //   itemCount: news!.articles!.length,
-              //   itemBuilder: (context, index) {
-              //     return NewsCard(
-              //       article: news.articles![index],
-              //     );
-              //   },
-              // );
             },
           ),
-        ),
+        ],
       ),
     );
   }
@@ -122,23 +127,94 @@ class NewsCard extends StatelessWidget {
   const NewsCard({
     super.key,
     required this.article,
+    required this.size,
   });
 
   final Article article;
+  final Size size;
 
   @override
   Widget build(BuildContext context) {
     return CardyContainer(
+      constraints: BoxConstraints(
+        maxWidth: size.width * 0.5,
+        // maxHeight: size.height * 0.25,
+      ),
       borderRadius: BorderRadius.circular(15),
-      color: ColorPalette.primary,
+      color: ColorPalette.cardColor,
       shadowColor: Colors.white.withOpacity(0.2),
       padding: const EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 10,
+        vertical: 20,
+        horizontal: 20,
       ),
-      child: Text(
-        article.title!,
-        style: Styles.bodyMedium(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: ColorPalette.accentRed,
+            ),
+            padding: const EdgeInsets.symmetric(
+              vertical: 5,
+              horizontal: 20,
+            ),
+            child: Text(
+              article.source!.name!,
+              style: Styles.bodyMedium(),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 5,
+              horizontal: 20,
+            ),
+            child: Text(
+              Normie.formatDate(
+                date: article.publishedAt!,
+                inputFormat: 'yyyy-MM-dd',
+                outputFormat: 'dd-MM-yyyy',
+              ),
+              style: Styles.bodySmall(
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Text(
+            article.title!.length > 70
+                ? '${article.title!.substring(0, 70)}...'
+                : article.title!,
+            style: Styles.appbar(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          if (article.content != null)
+            Column(
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: size.height * 0.2,
+                  ),
+                  child: Text(
+                    article.content!.length > 200
+                        ? article.content!.substring(0, 200)
+                        : article.content!,
+                    style: Styles.bodyMedium(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+        ],
       ),
     );
   }
