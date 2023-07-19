@@ -1,0 +1,28 @@
+name: news_app
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+
+dependencies:
+  dio: ^5.3.0
+  flutter:
+    sdk: flutter
+  flutter_provider: ^2.1.0
+  flutter_svg: ^2.0.7
+  provider: ^6.0.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - lib/keys.txt
+    - assets/
+    - assets/svgs/
