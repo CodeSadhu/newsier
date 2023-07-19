@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/utils/styles.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,11 +7,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Text(
-            'Homescreen',
-          ),
+      body: Center(
+        child: Text(
+          'Homescreen',
+          style: Styles.bodyLarge(),
         ),
       ),
     );

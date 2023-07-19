@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:news_app/providers/news_provider.dart';
 import 'package:news_app/screens/splash.dart';
+import 'package:news_app/utils/colors.dart';
+import 'package:news_app/utils/constants.dart';
 import 'package:news_app/utils/credentials.dart';
 import 'package:provider/provider.dart';
 
@@ -37,9 +39,15 @@ class MyApp extends StatelessWidget {
           create: (context) => NewsProvider(),
         )
       ],
-      child: const MaterialApp(
-        home: SplashScreen(),
+      child: MaterialApp(
+        home: const SplashScreen(),
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: const ColorScheme.dark(),
+          primaryColor: ColorPalette.primary,
+          fontFamily: Constants.appFont,
+          useMaterial3: true,
+        ),
       ),
     );
   }
