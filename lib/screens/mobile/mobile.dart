@@ -2,6 +2,7 @@ import 'package:carded/carded.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/models/news.dart';
 import 'package:news_app/providers/news_provider.dart';
+import 'package:news_app/screens/mobile/news_details.dart';
 import 'package:news_app/utils/colors.dart';
 import 'package:news_app/utils/constants.dart';
 import 'package:news_app/utils/styles.dart';
@@ -87,17 +88,47 @@ class _HomeScreenState extends State<HomeScreen> {
                       enableSwipeUp: false,
                       onCardSwiped: (dir, index, widget) {
                         _cardSectionController.addItem(
-                          NewsCard(
-                            size: size,
-                            article: news.articles![index],
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NewsDetailsMobile(
+                                  article: news.articles![index],
+                                  size: size,
+                                ),
+                              ),
+                            ),
+                            child: NewsCard(
+                              size: size,
+                              article: news.articles![index],
+                            ),
                           ),
                         );
                       },
                       items: List.generate(
                         news.articles!.length,
-                        (index) => NewsCard(
-                          size: size,
-                          article: news.articles![index],
+                        (index) => InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NewsDetailsMobile(
+                                article: news.articles![index],
+                                size: size,
+                              ),
+                            ),
+                          ),
+                          child: NewsCard(
+                            size: size,
+                            article: news.articles![index],
+                          ),
                         ),
                       ),
                     ),
