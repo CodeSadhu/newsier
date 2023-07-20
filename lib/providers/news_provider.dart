@@ -21,6 +21,13 @@ class NewsProvider with ChangeNotifier {
 
   News? get news => _news;
 
+  void refetchData() {
+    _news = null;
+    _isFetching = true;
+    notifyListeners();
+    fetchNews();
+  }
+
   Future<void> fetchNews() async {
     try {
       final response = await dio.get(

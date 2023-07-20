@@ -60,10 +60,22 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.only(
               top: 10,
               left: 20,
+              right: 20,
             ),
-            child: Text(
-              'Latest news',
-              style: Styles.bodyLarge(),
+            child: Row(
+              children: [
+                Text(
+                  'Latest news',
+                  style: Styles.bodyLarge(),
+                ),
+                const Spacer(),
+                InkWell(
+                  child: const Icon(Icons.refresh_rounded),
+                  onTap: () {
+                    _newsProvider.refetchData();
+                  },
+                ),
+              ],
             ),
           ),
           Consumer<NewsProvider>(
