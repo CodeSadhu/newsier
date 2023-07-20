@@ -19,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late Size size;
   late NewsProvider _newsProvider;
-  SwipeableCardSectionController _cardSectionController =
+  final SwipeableCardSectionController _cardSectionController =
       SwipeableCardSectionController();
 
   @override
@@ -81,15 +81,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   return SizedBox(
                     height: size.height * 0.7,
                     child: SwipeableCardsSection(
-                      // cardWidthBottomMul: 0,
-                      // cardWidthMiddleMul: 0,
-                      // cardWidthTopMul: 0,
                       cardController: _cardSectionController,
                       context: context,
                       enableSwipeDown: false,
                       enableSwipeUp: false,
                       onCardSwiped: (dir, index, widget) {
-                        //Add the next card using _cardController
                         _cardSectionController.addItem(
                           NewsCard(
                             size: size,

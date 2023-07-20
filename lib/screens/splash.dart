@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:news_app/screens/home.dart';
+import 'package:news_app/screens/mobile/mobile.dart';
+import 'package:news_app/screens/web/web.dart';
 import 'package:news_app/utils/assets.dart';
 import 'package:news_app/utils/colors.dart';
+import 'package:news_app/utils/responsive.dart';
 import 'package:news_app/utils/styles.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,7 +29,12 @@ class _SplashScreenState extends State<SplashScreen>
       if (status == AnimationStatus.completed) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          MaterialPageRoute(
+            builder: (context) => const Responsive(
+              mobile: HomeScreen(),
+              desktop: WebScreen(),
+            ),
+          ),
         );
       }
     });
