@@ -19,7 +19,6 @@ Welcome to Newsier, your one-stop destination for the latest news from all aroun
 
 ![Web Screen 1](assets/screenshots/web/1.png)
 ![Web Screen 2](assets/screenshots/web/2.png)
-![Web Screen 3](assets/screenshots/web/3.png)
 
 ## How to Use
 
