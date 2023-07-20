@@ -27,6 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    fetchNewsData();
+  }
+
+  void fetchNewsData() {
     _newsProvider = Provider.of<NewsProvider>(context, listen: false);
     _newsProvider.fetchNews();
   }

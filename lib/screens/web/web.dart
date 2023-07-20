@@ -24,6 +24,10 @@ class _WebScreenState extends State<WebScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    fetchNewsData();
+  }
+
+  void fetchNewsData() {
     _newsProvider = Provider.of<NewsProvider>(context, listen: false);
     _newsProvider.fetchNews();
   }
