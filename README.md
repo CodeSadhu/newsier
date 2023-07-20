@@ -11,6 +11,16 @@ Welcome to Newsier, your one-stop destination for the latest news from all aroun
 - Responsive design for seamless access on both web and mobile devices.
 - Aesthetic user interface to enhance your news exploration.
 
+## Screenshots
+
+![Mobile Screen 1](assets/screenshots/mobile/1.png)
+![Mobile Screen 2](assets/screenshots/mobile/2.png)
+![Mobile Screen 3](assets/screenshots/mobile/3.png)
+
+![Web Screen 1](assets/screenshots/web/1.png)
+![Web Screen 2](assets/screenshots/web/2.png)
+![Web Screen 3](assets/screenshots/web/3.png)
+
 ## How to Use
 
 To start exploring the world of Newsier, follow these simple steps:
